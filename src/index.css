@@ -1,0 +1,105 @@
+/* LensFlow - estilos globais */
+
+@import "tailwindcss";
+
+@theme {
+  /* cores */
+  --color-ink: #080a0f;
+  --color-dark: #0e1117;
+  --color-surface: #13171f;
+  --color-card: #181d27;
+  --color-paper: #f5f7fa;
+  --color-muted: #8a93a3;
+  --color-lime: #e8ff47;
+  --color-mint: #4fffb0;
+
+  /* cor de cada modo */
+  --color-auto: #fb923c;
+  --color-estudo: #60a5fa;
+  --color-pet: #4ade80;
+  --color-retrato: #c084fc;
+  --color-paisagem: #2dd4bf;
+  --color-manual: #a78bfa;
+
+  /* fontes */
+  --font-display: "Syne", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* visor da câmera */
+.visor-grade {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: calc(100% / 3) calc(100% / 3);
+}
+
+/* cantos de foco, a cor vem do --cor-foco */
+.cantoneiras {
+  --cor-foco: var(--color-paper);
+  position: relative;
+}
+
+.cantoneiras > .canto {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--cor-foco);
+  transition: border-color 400ms ease;
+  pointer-events: none;
+}
+
+.canto--ts { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+.canto--td { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+.canto--bs { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+.canto--bd { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+
+@keyframes aviso-entrada {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.aviso-animado {
+  animation: aviso-entrada 450ms ease-out;
+}
+
+.foco-hover .canto {
+  transition: transform 300ms ease, border-color 300ms ease;
+}
+.foco-hover:hover .canto--ts { transform: translate(6px, 6px); }
+.foco-hover:hover .canto--td { transform: translate(-6px, 6px); }
+.foco-hover:hover .canto--bs { transform: translate(6px, -6px); }
+.foco-hover:hover .canto--bd { transform: translate(-6px, -6px); }
+
+@keyframes piscar {
+  50% { opacity: 0.25; }
+}
+.ponto-rec {
+  animation: piscar 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .aviso-animado,
+  .ponto-rec { animation: none; }
+  .foco-hover .canto,
+  .cantoneiras > .canto { transition: none; }
+}

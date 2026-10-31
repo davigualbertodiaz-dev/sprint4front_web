@@ -1,0 +1,7 @@
+[
+  { "id": 1, "nome": "Arthur Meneghin Nery", "funcao": "HTML Semântico & Estrutura", "foto": "/img/equipe/nery.jpg" },
+  { "id": 2, "nome": "Donizetti Roberto", "funcao": "CSS Grid & Layout", "foto": "/img/equipe/donizetti.jpg" },
+  { "id": 3, "nome": "Mariana Bruzadim", "funcao": "Responsividade & Testes", "foto": "/img/equipe/mariana.jpg" },
+  { "id": 4, "nome": "Davi Gualberto", "funcao": "Estilo Visual & Identidade", "foto": "/img/equipe/davi.jpg" },
+  { "id": 5, "nome": "Rhuan", "funcao": "Conteúdo & Acessibilidade", "foto": "/img/equipe/rhuan.jpg" }
+]

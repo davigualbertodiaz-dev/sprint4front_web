@@ -1,0 +1,86 @@
+[
+  {
+    "id": "auto",
+    "nome": "Automático",
+    "imagem": "/img/auto.png",
+    "alt": "Interface do modo Automático detectando uma pessoa e sugerindo o Modo Retrato",
+    "gatilho": "Sempre ligado — é o modo inicial da câmera",
+    "descricao": "A IA identifica documentos, pets, pessoas e paisagens e muda de modo sozinha, sempre avisando: \"Pessoa detectada — mudando para Modo Retrato. Desfoque de fundo e ajuste de pele ativados.\"",
+    "recursos": ["Detecção automática de contexto", "Notificação de troca de modo", "Mudança automática ativável"],
+    "antes": "Pessoa aparece na cena e a foto sai sem ajuste nenhum, no modo genérico.",
+    "depois": "\"Pessoa detectada — mudando para Modo Retrato. Desfoque de fundo e ajuste de pele ativados.\"",
+    "deteccao": null
+  },
+  {
+    "id": "estudo",
+    "nome": "Estudo",
+    "imagem": "/img/estudo.png",
+    "alt": "Interface do modo Estudo pedindo o nome da sessão antes de ativar o Documento em Ultra HD",
+    "gatilho": "Documento, quadro ou caderno na cena",
+    "descricao": "Dá um nome pra sessão (ex: \"Matemática Cap. 5\") e o modo Documento em Ultra HD liga sozinho. No fim, tudo já sai organizado em pastas e PDFs.",
+    "recursos": ["Nome da sessão", "Documento em Ultra HD", "Organização automática"],
+    "antes": "Foto solta do quadro ou da anotação, sem nome, sem organização.",
+    "depois": "Nomeia a sessão (\"Matemática Cap. 5\"), ativa Documento em Ultra HD e organiza tudo em pasta/PDF sozinho.",
+    "deteccao": {
+      "titulo": "Documento detectado — mudando para Modo Estudo",
+      "detalhe": "Documento em Ultra HD ativado"
+    }
+  },
+  {
+    "id": "pet",
+    "nome": "Pet",
+    "imagem": "/img/pet.png",
+    "alt": "Interface do modo Pet com o botão Chamando atenção ativado",
+    "gatilho": "Cachorro ou gato na cena",
+    "descricao": "Toca em \"Chamando atenção...\" e o sistema emite som e luz pra chamar o pet, capturando automaticamente assim que ele olha pra câmera. Foco contínuo acompanha cada movimento.",
+    "recursos": ["Sons de chamada", "Foco automático contínuo", "Captura no momento certo"],
+    "antes": "O pet não olha pra câmera e a foto perde o momento.",
+    "depois": "Toca em \"Chamando atenção...\", o som e a luz atraem o pet e a captura é automática.",
+    "deteccao": {
+      "titulo": "Pet detectado — mudando para Modo Pet",
+      "detalhe": "Foco automático contínuo ativado"
+    }
+  },
+  {
+    "id": "retrato",
+    "nome": "Retrato",
+    "imagem": "/img/retrato.png",
+    "alt": "Interface do modo Retrato com desfoque de fundo ativado",
+    "gatilho": "Pessoa enquadrada na cena",
+    "descricao": "Desfoque de fundo e ajuste de pele automáticos assim que uma pessoa é detectada na cena — sem precisar trocar de modo manualmente.",
+    "recursos": ["Desfoque de fundo", "Ajuste de pele automático", "Detecção de pessoa"],
+    "antes": "Fundo poluído disputando atenção com quem está sendo fotografado.",
+    "depois": "Desfoque de fundo e ajuste de pele ativados automaticamente ao detectar a pessoa.",
+    "deteccao": {
+      "titulo": "Pessoa detectada — mudando para Modo Retrato",
+      "detalhe": "Desfoque de fundo e ajuste de pele ativados"
+    }
+  },
+  {
+    "id": "paisagem",
+    "nome": "Paisagem",
+    "imagem": "/img/paisagem.png",
+    "alt": "Interface do modo Paisagem com cores vibrantes ativadas",
+    "gatilho": "Céu, horizonte ou cenário aberto",
+    "descricao": "Cores vibrantes ativadas assim que a IA reconhece um cenário aberto — céu, horizonte e paisagem com mais saturação, sem ajuste manual.",
+    "recursos": ["Cores vibrantes", "Detecção automática de cenário", "Ideal para espaços abertos"],
+    "antes": "Céu e horizonte saem apagados, sem saturação.",
+    "depois": "Cores vibrantes ativadas assim que a IA reconhece o cenário aberto.",
+    "deteccao": {
+      "titulo": "Paisagem detectada — mudando para Modo Paisagem",
+      "detalhe": "Cores vibrantes ativadas"
+    }
+  },
+  {
+    "id": "manual",
+    "nome": "Manual",
+    "imagem": "/img/manual.png",
+    "alt": "Interface do modo Manual com os controles de ISO, exposição, balanço de branco, saturação, contraste e nitidez",
+    "gatilho": "Só quando você escolhe — a IA não entra aqui",
+    "descricao": "Controle total sobre ISO, exposição, balanço de branco, saturação, contraste e nitidez — além de zoom e flash, disponíveis em todos os modos.",
+    "recursos": ["ISO 100–3200", "Exposição -2 a +2", "Saturação, contraste e nitidez"],
+    "antes": "Configuração automática não atende quem já sabe o que quer da cena.",
+    "depois": "ISO (100–3200), exposição (-2 a +2), balanço de branco, saturação, contraste e nitidez, tudo ajustável.",
+    "deteccao": null
+  }
+]
