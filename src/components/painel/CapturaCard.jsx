@@ -14,7 +14,12 @@ export default function CapturaCard({ captura, aoRemover }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-white/[0.07] bg-card">
       {captura.imagem ? (
-        <img src={captura.imagem} alt="Foto de cachorro capturada no Modo Pet" className="aspect-[4/3] w-full object-cover" loading="lazy" />
+        <img
+          src={captura.imagem}
+          alt={captura.origemImagem === 'camera' ? `Foto capturada no modo ${nomesModos[captura.modo]}` : 'Foto de cachorro vinda da API Dog CEO'}
+          className="aspect-[4/3] w-full object-cover"
+          loading="lazy"
+        />
       ) : (
         <div className={`visor-grade grid aspect-[4/3] place-items-center ${estilo.fundo}`}>
           <Icone size={40} className={estilo.texto} aria-hidden="true" />

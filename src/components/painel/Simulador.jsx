@@ -1,18 +1,37 @@
 import { useState } from 'react'
-import { Camera, ScanSearch, LoaderCircle } from 'lucide-react'
+import { Camera, ScanSearch, LoaderCircle, Video, VideoOff } from 'lucide-react'
 import estilosModos, { nomesModos } from '../../data/estilosModos'
 import BarraModos from '../ui/BarraModos'
 import Cantoneiras from '../ui/Cantoneiras'
 import useSimuladorCamera from '../../hooks/useSimuladorCamera'
+import useCameraReal from '../../hooks/useCameraReal'
 
 export default function Simulador({ modos, aoCapturar }) {
   const { modo, trocarModo, aviso, processando, erro, capturar } = useSimuladorCamera(modos, aoCapturar)
+  const { videoRef, ligada, erro: erroCamera, ligar, desligar, tirarFoto } = useCameraReal()
   const [nomeSessao, setNomeSessao] = useState('')
+  const [flash, setFlash] = useState(false)
 
   const estilo = aviso ? estilosModos[aviso.modo] : estilosModos[modo]
 
   function aoClicarCapturar() {
-    capturar(nomeSessao)
+    const foto = tirarFoto()
+    if (foto) {
+      setFlash(true)
+      setTimeout(() => setFlash(false), 150)
+    }
+    capturar(nomeSessao, foto)
+  }
+
+  let dica = 'Toque no botão para capturar neste modo.'
+  if (!ligada) {
+    dica = 'Ligue a câmera para salvar fotos de verdade. Com ela desligada, o simulador salva só os dados da captura.'
+  }
+  if (modo === 'auto') {
+    dica += ' No Automático, o simulador sorteia a cena detectada e troca de modo sozinho.'
+  }
+  if (modo === 'pet' && !ligada) {
+    dica = 'Com a câmera desligada, a foto do pet vem de uma API pública (Dog CEO).'
   }
 
   return (
@@ -23,7 +42,19 @@ export default function Simulador({ modos, aoCapturar }) {
       </div>
 
       <div className="relative grid min-h-80 grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(120%_90%_at_15%_0%,#1b2436_0%,#0e1117_60%,#080a0f_100%)] sm:min-h-96">
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 size-full object-cover ${ligada ? '' : 'hidden'}`}
+          playsInline
+          muted
+          autoPlay
+          aria-label="Imagem ao vivo da câmera"
+        />
         <div className="visor-grade pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div
+          className={`pointer-events-none absolute inset-0 z-20 bg-white transition-opacity duration-150 motion-reduce:hidden ${flash ? 'opacity-60' : 'opacity-0'}`}
+          aria-hidden="true"
+        />
 
         <div className="relative z-10 flex flex-col items-center gap-3 px-2 pt-3">
           <BarraModos ativo={modo} aoEscolher={trocarModo} />
@@ -47,7 +78,17 @@ export default function Simulador({ modos, aoCapturar }) {
           </div>
         </div>
 
-        <div className="relative z-10 flex justify-center pb-4">
+        <div className="relative z-10 grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-3 pb-4">
+          <button
+            type="button"
+            onClick={ligada ? desligar : ligar}
+            aria-pressed={ligada}
+            className="inline-flex items-center gap-2 justify-self-start rounded-full border border-white/15 bg-ink/70 px-3 py-2 text-xs font-medium text-paper backdrop-blur hover:border-white/40"
+          >
+            {ligada ? <VideoOff size={15} aria-hidden="true" /> : <Video size={15} aria-hidden="true" />}
+            {ligada ? 'Desligar câmera' : 'Ligar câmera'}
+          </button>
+
           <button
             type="button"
             onClick={aoClicarCapturar}
@@ -57,6 +98,13 @@ export default function Simulador({ modos, aoCapturar }) {
           >
             {processando ? <LoaderCircle size={22} className="animate-spin" /> : <Camera size={22} />}
           </button>
+
+          {ligada && (
+            <p className="flex items-center gap-2 justify-self-end rounded-full bg-ink/70 px-3 py-1.5 font-mono text-[11px] tracking-widest text-paper backdrop-blur">
+              <span className="ponto-rec size-2 rounded-full bg-red-500" aria-hidden="true" />
+              AO VIVO
+            </p>
+          )}
         </div>
       </div>
 
@@ -74,17 +122,11 @@ export default function Simulador({ modos, aoCapturar }) {
         </div>
       )}
 
-      <p className="mt-4 px-1 text-sm leading-relaxed text-muted">
-        {modo === 'auto'
-          ? 'No Automático, a "IA" sorteia o que está na cena e troca de modo sozinha. Toque no botão para capturar.'
-          : modo === 'pet'
-            ? 'No Modo Pet, a foto do pet vem de uma API pública (Dog CEO).'
-            : 'Toque no botão para capturar neste modo.'}
-      </p>
+      <p className="mt-4 px-1 text-sm leading-relaxed text-muted">{dica}</p>
 
-      {erro && (
+      {(erroCamera || erro) && (
         <p role="alert" className="mt-3 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200">
-          {erro}
+          {erroCamera || erro}
         </p>
       )}
     </section>

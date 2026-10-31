@@ -38,7 +38,7 @@ export default function useSimuladorCamera(modos, salvarCaptura) {
     }
   }
 
-  async function capturar(nomeSessao) {
+  async function capturar(nomeSessao, fotoCamera) {
     setErro(null)
     setProcessando(true)
 
@@ -53,9 +53,12 @@ export default function useSimuladorCamera(modos, salvarCaptura) {
       setAviso(null)
     }
 
-    let imagem = null
-    if (modoFinal === 'pet') {
+    // com a câmera ligada usa a foto real; sem câmera, o pet vem da API
+    let imagem = fotoCamera
+    let origemImagem = fotoCamera ? 'camera' : null
+    if (!imagem && modoFinal === 'pet') {
       imagem = await buscarFotoPet()
+      if (imagem) origemImagem = 'api'
     }
 
     let sessao = null
@@ -68,6 +71,7 @@ export default function useSimuladorCamera(modos, salvarCaptura) {
       viaAuto: modo === 'auto',
       sessao,
       imagem,
+      origemImagem,
       ...gerarAjustes(),
     })
 

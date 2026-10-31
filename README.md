@@ -25,6 +25,7 @@ Nomes completos e RMs no arquivo `INTEGRANTES.txt`.
 - Vite 8
 - lucide-react (ícones)
 - Fontsource (fontes Syne, DM Sans e IBM Plex Mono)
+- API de câmera do navegador (`getUserMedia`) + `<canvas>` para tirar as fotos
 - localStorage (login, capturas e mensagens do formulário)
 - API mockada em JSON (`public/api/`)
 - Dog CEO API (API pública usada no Modo Pet do simulador)
@@ -70,6 +71,14 @@ A rota `/painel` é privada.
 
 Na tela de login tem o botão "Preencher automaticamente".
 
+## Câmera
+
+No `/painel`, o botão **Ligar câmera** abre a câmera do aparelho (traseira no celular, webcam no notebook). O navegador pede permissão na primeira vez. Cada captura salva uma foto pequena (400 px, JPG) no localStorage, e o painel guarda as 30 mais recentes.
+
+A câmera só funciona em HTTPS ou em `localhost`, então funciona no `npm run dev` e no link da Vercel. Com a câmera desligada o simulador continua funcionando, salvando só os dados da captura (e no Modo Pet a foto vem da Dog CEO API).
+
+A troca de modo no Automático é simulada: o sistema sorteia a cena detectada com `Math.random`.
+
 ## Rotas
 
 | Rota | Tipo | Conteúdo |
@@ -111,6 +120,7 @@ vercel.json
 | `useLocalStorage` | `useState` que salva no localStorage |
 | `useAuth` | dados do usuário logado, `entrar` e `sair` |
 | `useCapturas` | adiciona, remove e limpa capturas e calcula as estatísticas |
+| `useCameraReal` | liga e desliga a câmera do aparelho e tira a foto do vídeo |
 | `useSimuladorCamera` | lógica do simulador (troca de modo, detecção sorteada, foto do pet) |
 | `useCicloDeModos` | troca o aviso de detecção do Hero sozinho |
 | `useRolarParaHash` | rola até a seção quando a URL tem âncora (ex: `/#equipe`) |

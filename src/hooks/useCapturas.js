@@ -10,7 +10,8 @@ export default function useCapturas() {
       data: new Date().toISOString(),
       ...nova,
     }
-    setCapturas((lista) => [captura, ...lista])
+    // guarda só as 30 mais recentes pra não estourar o localStorage
+    setCapturas((lista) => [captura, ...lista].slice(0, 30))
   }
 
   function remover(id) {

@@ -17,7 +17,10 @@ export default function ListaCapturas({ capturas, aoRemover, aoLimpar }) {
   return (
     <section aria-labelledby="titulo-capturas" className="mt-6 rounded-3xl border border-white/[0.07] bg-surface p-4 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-4 px-1">
-        <h2 id="titulo-capturas" className="font-display text-xl font-bold">Minhas capturas</h2>
+        <div>
+          <h2 id="titulo-capturas" className="font-display text-xl font-bold">Minhas capturas</h2>
+          <p className="mt-1 text-xs text-muted">O painel guarda as 30 capturas mais recentes.</p>
+        </div>
 
         {capturas.length > 0 && !confirmando && (
           <button type="button" onClick={() => setConfirmando(true)} className="text-sm text-muted hover:text-red-300">
