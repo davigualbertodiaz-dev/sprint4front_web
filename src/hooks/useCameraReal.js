@@ -5,8 +5,19 @@ export default function useCameraReal() {
   const streamRef = useRef(null)
   const [ligada, setLigada] = useState(false)
   const [erro, setErro] = useState(null)
+  // environment = câmera traseira, user = câmera frontal (selfie)
+  const [lado, setLado] = useState('environment')
+  const [podeVirar, setPodeVirar] = useState(false)
 
-  async function ligar() {
+  function pararStream() {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop())
+      streamRef.current = null
+    }
+    if (videoRef.current) videoRef.current.srcObject = null
+  }
+
+  async function abrir(novoLado) {
     setErro(null)
 
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -14,17 +25,26 @@ export default function useCameraReal() {
       return
     }
 
+    // precisa parar a câmera atual antes de abrir a outra
+    pararStream()
+
     try {
-      // environment = câmera traseira no celular (no notebook usa a webcam normal)
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' },
+        video: { facingMode: novoLado },
         audio: false,
       })
       streamRef.current = stream
       videoRef.current.srcObject = stream
       await videoRef.current.play()
+      setLado(novoLado)
       setLigada(true)
+
+      // só mostra o botão de virar se o aparelho tiver mais de uma câmera
+      const dispositivos = await navigator.mediaDevices.enumerateDevices()
+      const cameras = dispositivos.filter((dispositivo) => dispositivo.kind === 'videoinput')
+      setPodeVirar(cameras.length > 1)
     } catch (e) {
+      setLigada(false)
       if (e.name === 'NotAllowedError') {
         setErro('Acesso à câmera negado. Libere a permissão no cadeado da barra de endereço e tente de novo.')
       } else if (e.name === 'NotFoundError') {
@@ -35,12 +55,16 @@ export default function useCameraReal() {
     }
   }
 
+  function ligar() {
+    abrir(lado)
+  }
+
+  function virar() {
+    abrir(lado === 'environment' ? 'user' : 'environment')
+  }
+
   function desligar() {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop())
-      streamRef.current = null
-    }
-    if (videoRef.current) videoRef.current.srcObject = null
+    pararStream()
     setLigada(false)
   }
 
@@ -63,9 +87,17 @@ export default function useCameraReal() {
     const canvas = document.createElement('canvas')
     canvas.width = largura
     canvas.height = altura
-    canvas.getContext('2d').drawImage(video, 0, 0, largura, altura)
+    const contexto = canvas.getContext('2d')
+
+    // na frontal a imagem fica espelhada, igual ao que aparece na tela
+    if (lado === 'user') {
+      contexto.translate(largura, 0)
+      contexto.scale(-1, 1)
+    }
+
+    contexto.drawImage(video, 0, 0, largura, altura)
     return canvas.toDataURL('image/jpeg', 0.7)
   }
 
-  return { videoRef, ligada, erro, ligar, desligar, tirarFoto }
+  return { videoRef, ligada, erro, lado, podeVirar, ligar, desligar, virar, tirarFoto }
 }

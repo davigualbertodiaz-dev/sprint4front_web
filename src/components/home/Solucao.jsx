@@ -3,7 +3,7 @@ import TituloSecao from '../ui/TituloSecao'
 const passos = [
   { titulo: 'Você aponta a câmera', texto: 'Não precisa escolher modo nenhum. A câmera abre sempre no Automático.' },
   { titulo: 'A IA reconhece a cena', texto: 'Documento, pet, pessoa ou paisagem: a detecção roda o tempo todo enquanto você enquadra.' },
-  { titulo: 'O modo certo liga e avisa', texto: 'Um aviso mostra o que mudou, tipo "Pessoa detectada — mudando para Modo Retrato".' },
+  { titulo: 'O modo certo liga e avisa', texto: 'Um aviso mostra o que mudou, tipo "Pessoa detectada - Mudando para Modo Retrato".' },
 ]
 
 export default function Solucao() {

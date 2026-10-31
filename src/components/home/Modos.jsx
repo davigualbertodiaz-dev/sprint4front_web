@@ -13,7 +13,7 @@ export default function Modos({ modos, carregando, erro }) {
           subtitulo="Cada modo foi projetado para uma situação real. A IA detecta o contexto e ajusta tudo automaticamente."
         />
 
-        <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando os modos da câmera…" />
+        <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando os modos da câmera..." />
 
         <div className="grid gap-6">
           {modos.map((modo, indice) => (

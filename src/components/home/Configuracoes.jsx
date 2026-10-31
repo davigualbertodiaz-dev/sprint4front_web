@@ -46,7 +46,7 @@ export default function Configuracoes() {
             loading="lazy"
           />
           <figcaption className="border-t border-white/[0.07] px-6 py-4 text-sm text-muted">
-            Tela de Configurações do protótipo — é daqui que vêm os recursos ao lado.
+            Tela de Configurações do protótipo, de onde vêm os recursos ao lado.
           </figcaption>
         </figure>
       </div>

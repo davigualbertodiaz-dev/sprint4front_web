@@ -13,7 +13,7 @@ export default function Equipe({ equipe, carregando, erro }) {
           subtitulo="Cinco pessoas, um projeto: repensar a câmera do smartphone JOVI para quem vive a rotina de estudante full-time."
         />
 
-        <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando a equipe…" />
+        <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando a equipe..." />
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {equipe.map((membro) => (

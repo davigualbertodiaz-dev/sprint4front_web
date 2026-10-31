@@ -5,7 +5,7 @@ const perfis = [
   {
     icone: GraduationCap,
     titulo: 'Estudantes full-time',
-    texto: 'Conciliam aula, trabalho e vida social. Não têm tempo de configurar câmera — precisam que ela já venha pronta pro momento.',
+    texto: 'Conciliam aula, trabalho e vida social. Não têm tempo de configurar câmera, precisam que ela já venha pronta pro momento.',
   },
   {
     icone: BookOpen,
@@ -20,7 +20,7 @@ const perfis = [
   {
     icone: Palette,
     titulo: 'Auto expressão',
-    texto: 'O celular é a ferramenta que esse público usa pra mostrar como enxerga o próprio mundo — a câmera precisa acompanhar esse ritmo.',
+    texto: 'O celular é a ferramenta que esse público usa pra mostrar como enxerga o próprio mundo, e a câmera precisa acompanhar esse ritmo.',
   },
 ]
 
@@ -32,7 +32,7 @@ export default function PublicoAlvo() {
           id="titulo-publico"
           etiqueta="Pra quem é"
           titulo="Feita para quem vive em movimento."
-          subtitulo="Estudantes full-time conciliam estudos, interações sociais e ambição. O smartphone os mantém conectados, produtivos e inspirados — mesmo na correria do dia a dia."
+          subtitulo="Estudantes full-time conciliam estudos, interações sociais e ambição. O smartphone os mantém conectados, produtivos e inspirados, mesmo na correria do dia a dia."
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

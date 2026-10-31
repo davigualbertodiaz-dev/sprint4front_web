@@ -141,7 +141,7 @@ export default function Contato({ equipe }) {
               ))}
             </ul>
             <p className="mt-6 border-t border-white/[0.07] pt-5 text-sm leading-relaxed text-muted">
-              Projeto desenvolvido em parceria FIAP × JOVI Smartphone — Challenge 2026.
+              Projeto desenvolvido em parceria FIAP x JOVI Smartphone, Challenge 2026.
             </p>
           </aside>
         </div>

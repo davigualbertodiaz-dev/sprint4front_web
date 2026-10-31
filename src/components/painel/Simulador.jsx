@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Camera, ScanSearch, LoaderCircle, Video, VideoOff } from 'lucide-react'
+import { Camera, ScanSearch, LoaderCircle, Video, VideoOff, SwitchCamera } from 'lucide-react'
 import estilosModos, { nomesModos } from '../../data/estilosModos'
 import BarraModos from '../ui/BarraModos'
 import Cantoneiras from '../ui/Cantoneiras'
@@ -8,7 +8,7 @@ import useCameraReal from '../../hooks/useCameraReal'
 
 export default function Simulador({ modos, aoCapturar }) {
   const { modo, trocarModo, aviso, processando, erro, capturar } = useSimuladorCamera(modos, aoCapturar)
-  const { videoRef, ligada, erro: erroCamera, ligar, desligar, tirarFoto } = useCameraReal()
+  const { videoRef, ligada, erro: erroCamera, lado, podeVirar, ligar, desligar, virar, tirarFoto } = useCameraReal()
   const [nomeSessao, setNomeSessao] = useState('')
   const [flash, setFlash] = useState(false)
 
@@ -44,7 +44,7 @@ export default function Simulador({ modos, aoCapturar }) {
       <div className="relative grid min-h-80 grid-cols-1 grid-rows-[auto_1fr_auto] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(120%_90%_at_15%_0%,#1b2436_0%,#0e1117_60%,#080a0f_100%)] sm:min-h-96">
         <video
           ref={videoRef}
-          className={`absolute inset-0 size-full object-cover ${ligada ? '' : 'hidden'}`}
+          className={`absolute inset-0 size-full object-cover ${ligada ? '' : 'hidden'} ${lado === 'user' ? '-scale-x-100' : ''}`}
           playsInline
           muted
           autoPlay
@@ -73,6 +73,12 @@ export default function Simulador({ modos, aoCapturar }) {
         </div>
 
         <div className="relative z-10 grid place-items-center">
+          {ligada && (
+            <p className="absolute top-0 left-3 flex items-center gap-2 rounded-full bg-ink/70 px-3 py-1.5 font-mono text-[11px] tracking-widest text-paper backdrop-blur">
+              <span className="ponto-rec size-2 rounded-full bg-red-500" aria-hidden="true" />
+              AO VIVO · {lado === 'user' ? 'FRONTAL' : 'TRASEIRA'}
+            </p>
+          )}
           <div className="cantoneiras size-28" style={{ '--cor-foco': estilo.corHex }} aria-hidden="true">
             <Cantoneiras />
           </div>
@@ -83,27 +89,31 @@ export default function Simulador({ modos, aoCapturar }) {
             type="button"
             onClick={ligada ? desligar : ligar}
             aria-pressed={ligada}
-            className="inline-flex items-center gap-2 justify-self-start rounded-full border border-white/15 bg-ink/70 px-3 py-2 text-xs font-medium text-paper backdrop-blur hover:border-white/40"
+            className="inline-flex items-center gap-2 justify-self-start whitespace-nowrap rounded-full border border-white/15 bg-ink/70 px-3 py-2 text-xs font-medium text-paper backdrop-blur hover:border-white/40"
           >
             {ligada ? <VideoOff size={15} aria-hidden="true" /> : <Video size={15} aria-hidden="true" />}
-            {ligada ? 'Desligar câmera' : 'Ligar câmera'}
+            {ligada ? 'Desligar' : 'Ligar câmera'}
           </button>
 
           <button
             type="button"
             onClick={aoClicarCapturar}
             disabled={processando}
-            aria-label={processando ? 'Capturando…' : `Capturar no modo ${nomesModos[modo]}`}
+            aria-label={processando ? 'Capturando...' : `Capturar no modo ${nomesModos[modo]}`}
             className="grid size-16 place-items-center rounded-full border-4 border-paper bg-ink/40 text-paper transition-transform hover:scale-105 disabled:opacity-60"
           >
             {processando ? <LoaderCircle size={22} className="animate-spin" /> : <Camera size={22} />}
           </button>
 
-          {ligada && (
-            <p className="flex items-center gap-2 justify-self-end rounded-full bg-ink/70 px-3 py-1.5 font-mono text-[11px] tracking-widest text-paper backdrop-blur">
-              <span className="ponto-rec size-2 rounded-full bg-red-500" aria-hidden="true" />
-              AO VIVO
-            </p>
+          {ligada && podeVirar && (
+            <button
+              type="button"
+              onClick={virar}
+              aria-label={lado === 'user' ? 'Virar para a câmera traseira' : 'Virar para a câmera frontal'}
+              className="grid size-12 place-items-center justify-self-end rounded-full border border-white/15 bg-ink/70 text-paper backdrop-blur transition-transform hover:border-white/40 active:scale-95"
+            >
+              <SwitchCamera size={20} aria-hidden="true" />
+            </button>
           )}
         </div>
       </div>

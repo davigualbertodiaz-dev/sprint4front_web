@@ -22,7 +22,7 @@ export default function Painel() {
     <div className="mx-auto max-w-7xl px-4 pt-24 pb-20 sm:px-6 lg:px-10">
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-mono text-xs tracking-[0.18em] text-lime uppercase">✦ Área do usuário</p>
+          <p className="font-mono text-xs tracking-[0.18em] text-lime uppercase">Área do usuário</p>
           <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Central de Capturas</h1>
           <p className="mt-2 text-muted">Olá, {usuario.nome}. Teste os modos da LensFlow e veja suas capturas aqui.</p>
         </div>

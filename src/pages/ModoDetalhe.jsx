@@ -15,7 +15,7 @@ export default function ModoDetalhe() {
   if (carregando || erro) {
     return (
       <div className="mx-auto max-w-5xl px-4 pt-28 pb-20 sm:px-6">
-        <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando o modo…" />
+        <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando o modo..." />
       </div>
     )
   }

@@ -8,7 +8,7 @@ export default function Footer() {
           LensFlow<span className="text-lime">.</span>
         </p>
         <p className="text-sm text-muted md:text-center">
-          © 2026 LensFlow — Câmera Adaptativa. Projeto acadêmico FIAP × JOVI, equipe StackOverfive.
+          © 2026 LensFlow - Câmera Adaptativa. Projeto acadêmico FIAP x JOVI, equipe StackOverfive.
         </p>
         <nav aria-label="Links do rodapé" className="flex gap-6 text-sm text-muted">
           <Link to="/#solucao" className="hover:text-paper">A Solução</Link>

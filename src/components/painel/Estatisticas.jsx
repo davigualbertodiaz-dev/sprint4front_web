@@ -17,7 +17,7 @@ export default function Estatisticas({ total, porModo, porcentagemAuto, maisUsad
         <div className="rounded-2xl bg-card p-4">
           <dt className="text-xs text-muted">Mais usado</dt>
           <dd className={`mt-2 text-sm font-semibold ${maisUsado ? estilosModos[maisUsado.modo].texto : 'text-muted'}`}>
-            {maisUsado ? nomesModos[maisUsado.modo] : '—'}
+            {maisUsado ? nomesModos[maisUsado.modo] : '-'}
           </dd>
         </div>
       </dl>

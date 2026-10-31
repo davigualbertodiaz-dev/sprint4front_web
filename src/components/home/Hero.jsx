@@ -19,7 +19,7 @@ export default function Hero({ modos }) {
     modoNaTela = modos.find((modo) => modo.id === escolhido) || null
   }
 
-  let aviso = { titulo: 'Procurando a cena…', detalhe: 'Aponte para um documento, pet, pessoa ou paisagem' }
+  let aviso = { titulo: 'Procurando a cena...', detalhe: 'Aponte para um documento, pet, pessoa ou paisagem' }
   if (escolhido === 'auto' && detectado) {
     aviso = detectado.deteccao
   } else if (escolhido === 'manual') {
@@ -65,8 +65,8 @@ export default function Hero({ modos }) {
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-paper/75 sm:text-lg">
               Muita gente usa a câmera do celular só no automático, porque a interface confunde e os modos certos
-              nunca aparecem na hora certa. A LensFlow detecta sozinha o que está na cena — documento, pet, pessoa
-              ou paisagem — e avisa quando troca de modo.
+              nunca aparecem na hora certa. A LensFlow detecta sozinha o que está na cena (documento, pet, pessoa
+              ou paisagem) e avisa quando troca de modo.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

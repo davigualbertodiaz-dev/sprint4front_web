@@ -1,19 +1,19 @@
 Equipe: StackOverfive
-Projeto: LensFlow — Câmera Adaptativa (JOVI Challenge 2026 — Sprint 4)
+LensFlow Sprint 4 - Camera Adaptativa.
 
 Nome completo: Arthur Meneghin Nery
-RM: (preencher)
+RM: 569088
 
-Nome completo: Donizetti Roberto
-RM: (preencher)
+Nome completo: Donizetti Roberto Batista Santos Junior
+RM: 569576
 
-Nome completo: Mariana Bruzadim
-RM: (preencher)
+Nome completo: Mariana de Souza Bruzadim
+RM: 568864
 
-Nome completo: Davi Gualberto
-RM: (preencher)
+Nome completo: Davi Vitor Gualberto Diaz
+RM: 569825
 
-Nome completo: Rhuan
-RM: (preencher)
+Nome completo: Rhuan Camargo dos Santos
+RM: 568967
 
-*** ATENÇÃO: preencher os RMs antes de gerar o .ZIP de entrega. ***
+
