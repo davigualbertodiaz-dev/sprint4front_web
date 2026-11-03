@@ -12,36 +12,43 @@ export default function CapturaCard({ captura, aoRemover }) {
   const sinal = captura.exposicao > 0 ? '+' : ''
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-white/[0.07] bg-card">
+    <article className="overflow-hidden rounded-xl ring-1 ring-zinc-800">
       {captura.imagem ? (
         <img
           src={captura.imagem}
-          alt={captura.origemImagem === 'camera' ? `Foto capturada no modo ${nomesModos[captura.modo]}` : 'Foto de cachorro vinda da API Dog CEO'}
+          alt={
+            captura.origemImagem === 'camera'
+              ? `Foto capturada no modo ${nomesModos[captura.modo]}`
+              : 'Foto de cachorro vinda da API Dog CEO'
+          }
           className="aspect-[4/3] w-full object-cover"
           loading="lazy"
         />
       ) : (
-        <div className={`visor-grade grid aspect-[4/3] place-items-center ${estilo.fundo}`}>
-          <Icone size={40} className={estilo.texto} aria-hidden="true" />
+        <div className={`grid aspect-[4/3] place-items-center ${estilo.fundo} ${estilo.texto}`}>
+          <Icone size={36} aria-hidden="true" />
         </div>
       )}
 
-      <div className="p-4">
+      <div className="p-3">
         <div className="flex flex-wrap items-center gap-2">
           <SeloModo modo={captura.modo} nome={nomesModos[captura.modo]} />
-          {captura.viaAuto && <span className="text-xs text-muted">via Automático</span>}
+          {captura.viaAuto && <span className="text-xs text-zinc-500">via Automático</span>}
         </div>
-        {captura.sessao && <p className="mt-3 text-sm font-medium">{captura.sessao}</p>}
-        <p className="mt-3 font-mono text-[11px] tracking-wider text-muted">
-          ISO {captura.iso} · EV {sinal}{captura.exposicao}
+        {captura.sessao && <p className="mt-2 text-sm font-medium">{captura.sessao}</p>}
+        <p className="mt-2 text-xs text-zinc-500">
+          ISO {captura.iso} · EV {sinal}
+          {captura.exposicao}
         </p>
-        <div className="mt-3 flex items-center justify-between">
-          <time dateTime={captura.data} className="text-xs text-muted">{formatarData(captura.data)}</time>
+        <div className="mt-2 flex items-center justify-between">
+          <time dateTime={captura.data} className="text-xs text-zinc-500">
+            {formatarData(captura.data)}
+          </time>
           <button
             type="button"
             onClick={() => aoRemover(captura.id)}
             aria-label={`Excluir captura do modo ${nomesModos[captura.modo]}`}
-            className="grid size-8 place-items-center rounded-full text-muted hover:bg-red-400/10 hover:text-red-300"
+            className="rounded-lg p-1.5 text-zinc-400 hover:bg-red-500/10 hover:text-red-400"
           >
             <Trash2 size={16} />
           </button>

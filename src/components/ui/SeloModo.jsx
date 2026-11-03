@@ -6,7 +6,7 @@ export default function SeloModo({ modo, nome }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${estilo.fundo} ${estilo.borda} ${estilo.texto}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${estilo.fundo} ${estilo.borda} ${estilo.texto}`}
     >
       <Icone size={14} aria-hidden="true" />
       {nome}

@@ -13,8 +13,7 @@ export default function useLocalStorage(chave, valorInicial) {
   useEffect(() => {
     try {
       localStorage.setItem(chave, JSON.stringify(valor))
-    } catch {
-    }
+    } catch {}
   }, [chave, valor])
 
   return [valor, setValor]

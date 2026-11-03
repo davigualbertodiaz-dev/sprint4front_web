@@ -19,28 +19,34 @@ export default function Painel() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pt-24 pb-20 sm:px-6 lg:px-10">
-      <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs tracking-[0.18em] text-lime uppercase">Área do usuário</p>
-          <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Central de Capturas</h1>
-          <p className="mt-2 text-muted">Olá, {usuario.nome}. Teste os modos da LensFlow e veja suas capturas aqui.</p>
+    <div className="bg-zinc-900/50">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <header className="relative isolate flex flex-wrap items-end justify-between gap-4 overflow-hidden rounded-3xl bg-zinc-900 ring-1 ring-zinc-800 p-8 text-white">
+          <div>
+            <p className="text-sm font-semibold text-violet-300">Área do usuário</p>
+            <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Central de Capturas</h1>
+            <p className="mt-2 text-zinc-400">
+              Olá, {usuario.nome}. Teste os modos da LensFlow e veja suas capturas aqui.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={aoSair}
+            className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium hover:bg-white/10"
+          >
+            <LogOut size={16} aria-hidden="true" /> Sair
+          </button>
+        </header>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-3 lg:items-start">
+          <div className="lg:col-span-2">
+            <Simulador modos={dados || []} aoCapturar={adicionar} />
+          </div>
+          <Estatisticas total={total} porModo={porModo} porcentagemAuto={porcentagemAuto} maisUsado={maisUsado} />
         </div>
-        <button
-          type="button"
-          onClick={aoSair}
-          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium hover:border-white/40"
-        >
-          <LogOut size={16} aria-hidden="true" /> Sair
-        </button>
-      </header>
 
-      <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-start">
-        <Simulador modos={dados || []} aoCapturar={adicionar} />
-        <Estatisticas total={total} porModo={porModo} porcentagemAuto={porcentagemAuto} maisUsado={maisUsado} />
+        <ListaCapturas capturas={capturas} aoRemover={remover} aoLimpar={limpar} />
       </div>
-
-      <ListaCapturas capturas={capturas} aoRemover={remover} aoLimpar={limpar} />
     </div>
   )
 }

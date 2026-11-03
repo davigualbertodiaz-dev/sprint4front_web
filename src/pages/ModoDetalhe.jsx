@@ -2,8 +2,8 @@ import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import useFetch from '../hooks/useFetch'
 import estilosModos from '../data/estilosModos'
-import SeloModo from '../components/ui/SeloModo'
 import EstadoCarregamento from '../components/ui/EstadoCarregamento'
+import SeloModo from '../components/ui/SeloModo'
 
 export default function ModoDetalhe() {
   const { id } = useParams()
@@ -14,7 +14,7 @@ export default function ModoDetalhe() {
 
   if (carregando || erro) {
     return (
-      <div className="mx-auto max-w-5xl px-4 pt-28 pb-20 sm:px-6">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <EstadoCarregamento carregando={carregando} erro={erro} texto="Carregando o modo..." />
       </div>
     )
@@ -22,10 +22,13 @@ export default function ModoDetalhe() {
 
   if (!modo) {
     return (
-      <div className="mx-auto max-w-5xl px-4 pt-28 pb-20 sm:px-6">
-        <h1 className="font-display text-4xl font-extrabold">Esse modo não existe.</h1>
-        <p className="mt-3 text-muted">A LensFlow tem seis modos: Auto, Estudo, Pet, Retrato, Paisagem e Manual.</p>
-        <Link to="/#modos" className="mt-6 inline-block rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink">
+      <div className="mx-auto max-w-5xl px-4 py-24 text-center sm:px-6">
+        <h1 className="text-3xl font-bold">Esse modo não existe.</h1>
+        <p className="mt-3 text-zinc-400">A LensFlow tem seis modos: Auto, Estudo, Pet, Retrato, Paisagem e Manual.</p>
+        <Link
+          to="/#modos"
+          className="mt-8 inline-block rounded-lg bg-violet-600 px-5 py-3 font-semibold text-white hover:bg-violet-700"
+        >
           Ver os seis modos
         </Link>
       </div>
@@ -33,61 +36,65 @@ export default function ModoDetalhe() {
   }
 
   const estilo = estilosModos[modo.id]
+  const Icone = estilo.icone
 
   return (
-    <article className="mx-auto max-w-6xl px-4 pt-24 pb-20 sm:px-6 lg:px-10">
-      <Link to="/#modos" className="inline-flex items-center gap-2 text-sm text-muted hover:text-paper">
+    <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+      <Link to="/#modos" className="inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white">
         <ArrowLeft size={16} aria-hidden="true" /> Voltar para os modos
       </Link>
 
-      <header className="mt-8 grid gap-4">
-        <SeloModo modo={modo.id} nome={modo.nome} />
-        <h1 className={`font-display text-5xl font-extrabold tracking-tight sm:text-7xl ${estilo.texto}`}>
-          Modo {modo.nome}
-        </h1>
-        <p className="font-mono text-xs tracking-[0.14em] text-muted uppercase">Ativa quando: {modo.gatilho}</p>
+      <header className="mt-8 flex flex-wrap items-center gap-4">
+        <span className={`grid size-14 place-items-center rounded-2xl ${estilo.fundo} ${estilo.texto}`}>
+          <Icone size={28} aria-hidden="true" />
+        </span>
+        <div>
+          <h1 className="text-3xl font-bold sm:text-4xl">Modo {modo.nome}</h1>
+          <p className="mt-1 text-zinc-400">Ativa quando: {modo.gatilho}</p>
+        </div>
       </header>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
-        <figure className="overflow-hidden rounded-3xl border border-white/[0.07]">
-          <img src={modo.imagem} alt={modo.alt} width="1400" height="620" className="w-full" />
-        </figure>
-        <div>
-          <p className="text-lg leading-relaxed text-paper/85">{modo.descricao}</p>
-          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Recursos do modo">
-            {modo.recursos.map((recurso) => (
-              <li key={recurso} className="rounded-full border border-white/10 px-3 py-1 text-xs text-paper/80">
-                {recurso}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <img
+        src={modo.imagem}
+        alt={modo.alt}
+        width="1400"
+        height="620"
+        className="mt-8 w-full rounded-2xl shadow-lg ring-1 ring-white/10"
+      />
 
-      <section aria-labelledby="titulo-antes-depois" className="mt-14">
-        <h2 id="titulo-antes-depois" className="font-display text-3xl font-extrabold tracking-tight">
+      <p className="mt-8 text-lg leading-relaxed text-zinc-300">{modo.descricao}</p>
+      <ul className="mt-4 flex flex-wrap gap-2" aria-label="Recursos do modo">
+        {modo.recursos.map((recurso) => (
+          <li key={recurso} className="rounded-full bg-zinc-800 px-3 py-1 text-sm text-zinc-300">
+            {recurso}
+          </li>
+        ))}
+      </ul>
+
+      <section aria-labelledby="titulo-antes-depois" className="mt-12">
+        <h2 id="titulo-antes-depois" className="text-2xl font-bold">
           Antes e depois
         </h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-3xl border border-white/[0.07] bg-surface p-7">
-            <p className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Câmera comum</p>
-            <p className="mt-3 leading-relaxed text-muted">{modo.antes}</p>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl bg-zinc-800 p-6">
+            <p className="text-sm font-semibold text-zinc-500">Câmera comum</p>
+            <p className="mt-2 text-zinc-300">{modo.antes}</p>
           </div>
-          <div className={`rounded-3xl border p-7 ${estilo.borda} ${estilo.fundo}`}>
-            <p className={`font-mono text-[11px] tracking-[0.16em] uppercase ${estilo.texto}`}>Com a LensFlow</p>
-            <p className="mt-3 leading-relaxed">{modo.depois}</p>
+          <div className={`rounded-2xl border p-6 ${estilo.fundo} ${estilo.borda}`}>
+            <p className={`text-sm font-semibold ${estilo.texto}`}>Com a LensFlow</p>
+            <p className="mt-2 text-zinc-200">{modo.depois}</p>
           </div>
         </div>
       </section>
 
-      <nav aria-label="Outros modos" className="mt-14 border-t border-white/[0.07] pt-8">
-        <p className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">Outros modos</p>
-        <ul className="mt-4 flex flex-wrap gap-2">
+      <nav aria-label="Outros modos" className="mt-12 border-t border-zinc-800 pt-8">
+        <p className="text-sm font-medium text-zinc-500">Outros modos</p>
+        <ul className="mt-3 flex flex-wrap gap-2">
           {modos
             .filter((item) => item.id !== modo.id)
             .map((item) => (
               <li key={item.id}>
-                <Link to={`/modos/${item.id}`}>
+                <Link to={`/modos/${item.id}`} className="transition-opacity hover:opacity-75">
                   <SeloModo modo={item.id} nome={item.nome} />
                 </Link>
               </li>

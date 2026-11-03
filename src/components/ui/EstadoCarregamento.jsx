@@ -1,8 +1,7 @@
 export default function EstadoCarregamento({ carregando, erro, texto }) {
   if (carregando) {
     return (
-      <p role="status" className="flex items-center gap-3 py-10 font-mono text-sm text-muted">
-        <span className="ponto-rec size-2 rounded-full bg-lime" aria-hidden="true" />
+      <p role="status" className="py-10 text-center text-zinc-500">
         {texto}
       </p>
     )
@@ -10,7 +9,7 @@ export default function EstadoCarregamento({ carregando, erro, texto }) {
 
   if (erro) {
     return (
-      <p role="alert" className="rounded-xl border border-red-400/30 bg-red-400/10 px-5 py-4 text-sm text-red-200">
+      <p role="alert" className="rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-300">
         {erro}
       </p>
     )

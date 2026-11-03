@@ -31,26 +31,27 @@ export default function Galeria() {
   }
 
   return (
-    <section id="galeria" aria-labelledby="titulo-galeria" className="scroll-mt-20 bg-dark px-4 py-20 sm:px-6 md:py-28 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+    <section id="galeria" aria-labelledby="titulo-galeria" className="scroll-mt-16 bg-zinc-900/50 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <TituloSecao
           id="titulo-galeria"
           etiqueta="Galeria"
-          titulo="O protótipo, tela por tela."
-          subtitulo="Capturas reais do protótipo da LensFlow. Toque em uma imagem para ampliar."
+          titulo="O protótipo,"
+          destaque="tela por tela"
+          subtitulo="Capturas reais do protótipo da LensFlow. Clique em uma imagem para ampliar."
         />
 
-        <div role="group" aria-label="Filtrar galeria" className="mb-8 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filtrar galeria" className="mb-8 flex justify-center gap-2">
           {filtros.map((item) => (
             <button
               key={item.id}
               type="button"
               aria-pressed={filtro === item.id}
               onClick={() => trocarFiltro(item.id)}
-              className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 filtro === item.id
-                  ? 'border-lime bg-lime text-ink'
-                  : 'border-white/15 text-muted hover:border-white/40 hover:text-paper'
+                  ? 'bg-violet-600 text-white'
+                  : 'bg-zinc-900 text-zinc-300 ring-1 ring-zinc-800 hover:bg-zinc-800'
               }`}
             >
               {item.texto}
@@ -58,26 +59,25 @@ export default function Galeria() {
           ))}
         </div>
 
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {fotos.map((foto, indice) => (
             <li key={foto.id}>
               <button
                 type="button"
                 onClick={() => setAberta(indice)}
-                className="group block w-full overflow-hidden rounded-2xl border border-white/[0.07] bg-card text-left"
+                className="group relative block w-full overflow-hidden rounded-2xl bg-zinc-900 text-left shadow-sm ring-1 ring-zinc-800"
               >
-                <span className="relative block overflow-hidden">
-                  <img
-                    src={foto.src}
-                    alt={foto.alt}
-                    loading="lazy"
-                    className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <span className="absolute right-3 bottom-3 grid size-8 place-items-center rounded-full bg-ink/70 opacity-0 transition-opacity group-hover:opacity-100">
-                    <Expand size={15} aria-hidden="true" />
-                  </span>
+                <img
+                  src={foto.src}
+                  alt={foto.alt}
+                  loading="lazy"
+                  className="aspect-video w-full object-cover object-top transition duration-500 group-hover:scale-110 group-hover:opacity-60"
+                />
+                {/* legenda que sobe ao passar o mouse */}
+                <span className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-black/60 px-4 pt-10 pb-3 text-sm font-medium text-white">
+                  {foto.titulo}
+                  <Expand size={16} className="opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                 </span>
-                <span className="block px-4 py-3 text-sm font-medium">{foto.titulo}</span>
               </button>
             </li>
           ))}

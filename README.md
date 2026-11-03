@@ -16,10 +16,10 @@ Repositório: https://github.com/davigualbertodiaz-dev/sprint4front_web
 
 - React 19
 - React Router DOM 7 (rotas públicas e privadas)
-- Tailwind CSS 4 e um pouco de CSS puro (src/index.css)
+- Tailwind CSS 4 (quase todo o estilo é feito com classes do Tailwind; o CSS puro em src/index.css é só a grade e os cantos de foco do visor da câmera e duas animações registradas no @theme)
 - Vite 8
 - lucide-react (ícones)
-- Fontsource (fontes Syne, DM Sans e IBM Plex Mono)
+- Fontsource (fonte Inter)
 - getUserMedia e canvas do navegador (câmera do simulador)
 - localStorage (login, capturas e mensagens do formulário de contato)
 - API mockada em JSON (pasta public/api)
@@ -103,8 +103,10 @@ Hooks customizados que criamos:
 - useCapturas: adiciona, remove e limpa capturas e calcula as estatísticas
 - useCameraReal: liga, desliga e vira a câmera e tira a foto
 - useSimuladorCamera: lógica do simulador (modo, cena sorteada, foto do pet)
-- useCicloDeModos: faz o aviso do topo da home trocar sozinho
 - useRolarParaHash: rola até a seção certa quando o link aponta para uma parte da home
+- useSecaoAtiva: marca no menu a seção que está na tela
+- Componente Revelar: faz as seções subirem ao aparecer na tela (IntersectionObserver + classes do Tailwind)
+- useCicloDeModos: faz o aviso de detecção do topo da home trocar sozinho
 
 
 **Deploy**

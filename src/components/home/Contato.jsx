@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Send } from 'lucide-react'
+import { useState } from 'react'
 import TituloSecao from '../ui/TituloSecao'
 import useLocalStorage from '../../hooks/useLocalStorage'
 
@@ -44,31 +44,35 @@ export default function Contato({ equipe }) {
   }
 
   const classeCampo =
-    'mt-2 w-full rounded-xl border bg-ink px-4 py-3 text-paper placeholder:text-muted/70 focus:border-lime focus:outline-none'
+    'mt-1 w-full rounded-lg border px-3 py-2.5 text-white placeholder:text-zinc-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/30 focus:outline-none'
+
+  // borda vermelha quando o campo tem erro
+  function borda(campo) {
+    return erros[campo] ? 'border-red-400' : 'border-zinc-700'
+  }
 
   return (
-    <section id="contato" aria-labelledby="titulo-contato" className="scroll-mt-20 px-4 py-20 sm:px-6 md:py-28 lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <p className="mb-16 max-w-4xl font-display text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-6xl">
-          Pronto para ver o mundo de outro <em className="text-lime">ângulo?</em>
-        </p>
-
+    <section id="contato" aria-labelledby="titulo-contato" className="scroll-mt-16 py-20 md:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <TituloSecao
           id="titulo-contato"
           etiqueta="Fale com a gente"
-          titulo="Contato"
+          titulo="Vamos"
+          destaque="conversar"
           subtitulo="Alguma dúvida ou feedback sobre o projeto LensFlow? Fala com a equipe StackOverfive."
         />
 
-        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid gap-8 lg:grid-cols-3">
           <form
             onSubmit={aoEnviar}
             noValidate
-            className="grid gap-5 rounded-3xl border border-white/[0.07] bg-surface p-6 sm:p-8"
+            className="grid gap-5 rounded-2xl bg-zinc-900 p-6 shadow-sm ring-1 ring-zinc-800 sm:p-8 lg:col-span-2"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label htmlFor="nome" className="text-sm font-medium">Nome</label>
+                <label htmlFor="nome" className="text-sm font-medium">
+                  Nome
+                </label>
                 <input
                   id="nome"
                   name="nome"
@@ -78,13 +82,18 @@ export default function Contato({ equipe }) {
                   placeholder="Seu nome"
                   aria-invalid={erros.nome ? 'true' : 'false'}
                   aria-describedby={erros.nome ? 'erro-nome' : undefined}
-                  className={`${classeCampo} ${erros.nome ? 'border-red-400/60' : 'border-white/10'}`}
+                  className={`${classeCampo} ${borda('nome')}`}
                 />
-                {erros.nome && <p id="erro-nome" className="mt-2 text-xs text-red-300">{erros.nome}</p>}
+                {erros.nome && (
+                  <p id="erro-nome" className="mt-1 text-sm text-red-400">
+                    {erros.nome}
+                  </p>
+                )}
               </div>
-
               <div>
-                <label htmlFor="email" className="text-sm font-medium">E-mail</label>
+                <label htmlFor="email" className="text-sm font-medium">
+                  E-mail
+                </label>
                 <input
                   id="email"
                   name="email"
@@ -94,14 +103,20 @@ export default function Contato({ equipe }) {
                   placeholder="seuemail@exemplo.com"
                   aria-invalid={erros.email ? 'true' : 'false'}
                   aria-describedby={erros.email ? 'erro-email' : undefined}
-                  className={`${classeCampo} ${erros.email ? 'border-red-400/60' : 'border-white/10'}`}
+                  className={`${classeCampo} ${borda('email')}`}
                 />
-                {erros.email && <p id="erro-email" className="mt-2 text-xs text-red-300">{erros.email}</p>}
+                {erros.email && (
+                  <p id="erro-email" className="mt-1 text-sm text-red-400">
+                    {erros.email}
+                  </p>
+                )}
               </div>
             </div>
 
             <div>
-              <label htmlFor="mensagem" className="text-sm font-medium">Mensagem</label>
+              <label htmlFor="mensagem" className="text-sm font-medium">
+                Mensagem
+              </label>
               <textarea
                 id="mensagem"
                 name="mensagem"
@@ -111,36 +126,45 @@ export default function Contato({ equipe }) {
                 placeholder="Escreva sua mensagem"
                 aria-invalid={erros.mensagem ? 'true' : 'false'}
                 aria-describedby={erros.mensagem ? 'erro-mensagem' : undefined}
-                className={`${classeCampo} resize-y ${erros.mensagem ? 'border-red-400/60' : 'border-white/10'}`}
+                className={`${classeCampo} ${borda('mensagem')}`}
               />
-              {erros.mensagem && <p id="erro-mensagem" className="mt-2 text-xs text-red-300">{erros.mensagem}</p>}
+              {erros.mensagem && (
+                <p id="erro-mensagem" className="mt-1 text-sm text-red-400">
+                  {erros.mensagem}
+                </p>
+              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-5 py-3 font-semibold text-white transition-colors hover:bg-violet-700"
               >
                 <Send size={16} aria-hidden="true" /> Enviar mensagem
               </button>
-              <p role="status" className="text-sm text-mint">
-                {enviado && 'Mensagem enviada. Como é um projeto acadêmico, ela fica salva neste navegador.'}
+              <p role="status" className="text-sm text-green-400">
+                {enviado && 'Mensagem enviada! Como é um projeto acadêmico, ela fica salva neste navegador.'}
               </p>
             </div>
-            <p className="text-xs text-muted">Mensagens salvas neste navegador: {mensagens.length}</p>
+            <p className="text-xs text-zinc-500">Mensagens salvas neste navegador: {mensagens.length}</p>
           </form>
 
-          <aside className="rounded-3xl border border-white/[0.07] bg-surface p-6 sm:p-8" aria-labelledby="titulo-contato-equipe">
-            <h3 id="titulo-contato-equipe" className="font-display text-xl font-bold">Equipe StackOverfive</h3>
+          <aside
+            aria-labelledby="titulo-contato-equipe"
+            className="relative isolate overflow-hidden rounded-2xl bg-zinc-900 p-6 ring-1 ring-zinc-800 text-white sm:p-8"
+          >
+            <h3 id="titulo-contato-equipe" className="text-lg font-semibold">
+              Equipe StackOverfive
+            </h3>
             <ul className="mt-5 grid gap-3">
               {equipe.map((membro) => (
-                <li key={membro.id} className="flex items-center gap-3">
+                <li key={membro.id} className="flex items-center gap-3 text-sm">
                   <img src={membro.foto} alt="" className="size-9 rounded-full object-cover" loading="lazy" />
-                  <span className="text-sm">{membro.nome}</span>
+                  {membro.nome}
                 </li>
               ))}
             </ul>
-            <p className="mt-6 border-t border-white/[0.07] pt-5 text-sm leading-relaxed text-muted">
+            <p className="mt-6 border-t border-zinc-700 pt-4 text-sm text-zinc-400">
               Projeto desenvolvido em parceria FIAP x JOVI Smartphone, Challenge 2026.
             </p>
           </aside>
