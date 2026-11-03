@@ -25,9 +25,7 @@ export default function Equipe({ equipe, carregando, erro }) {
           ))}
         </div>
 
-        <p className="mt-8 text-center text-xs text-zinc-500">
-          *Funções da equipe referentes à disciplina de Front-End Design.
-        </p>
+       
       </div>
     </section>
   )

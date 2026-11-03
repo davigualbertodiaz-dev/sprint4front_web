@@ -11,7 +11,6 @@ Repositório: https://github.com/davigualbertodiaz-dev/sprint4front_web
 
 
 
-
 **Tecnologias utilizadas**
 
 - React 19

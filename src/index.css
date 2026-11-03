@@ -1,12 +1,10 @@
-/* LensFlow - estilos globais */
+
 
 @import "tailwindcss";
 
-/* fonte padrão do site */
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* animações novas viram classes do Tailwind: animate-faixa e animate-flutuar */
   --animate-faixa: faixa 30s linear infinite;
   --animate-flutuar: flutuar 5s ease-in-out infinite;
 
@@ -25,9 +23,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ---------- visor da câmera do simulador ---------- */
 
-/* grade 3x3, igual às linhas de grade do protótipo */
 .visor-grade {
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
@@ -35,7 +31,6 @@ html {
   background-size: calc(100% / 3) calc(100% / 3);
 }
 
-/* cantos de foco, a cor vem do --cor-foco */
 .cantoneiras {
   --cor-foco: #ffffff;
   position: relative;
